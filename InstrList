@@ -1,0 +1,20 @@
+<div>
+<? var data = valid(); ?>
+<? var j =0 ?>
+<form id="form" name="form">
+<? if(Object.prototype.toString.call(data) == '[object Array]') { ?>
+<? for (var i = 0; i < data.length-(data[data.length-1]+1); i++) { ?>
+<? while (j < data[data.length-1]) { ?>
+<? if(data[i] == data[j]) { ?>
+<input type="checkbox" id="ch<?= '' + i ?>" name="ch<?= '' + i  ?>" value="<?= data[i] ?>"checked><?= data[i] ?><br>
+<?j+=1?>
+<? }else{ ?>
+<input type="checkbox" id="ch<?= '' + i ?>" name="ch<?= '' + i  ?>" value="<?= data[i] ?>"><?= data[i] ?><br>
+
+<? } ?>
+<? } ?>
+<? } ?>
+<? } ?>
+<input type="button" value="add instructors" onclick="google.script.run.fillCell(this.parentNode)" />
+</form>
+</div>
