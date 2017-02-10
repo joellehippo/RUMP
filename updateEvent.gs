@@ -1,6 +1,7 @@
 // This function keeps track of edited information
 function onEdit(e){
   // Set a comment on the edited cell to indicate when it is modified
+  Logger.log("Edit detected");
   var range = e.range;
   var rowOfRange = range.getLastRow();
   Logger.log("Row: " + rowOfRange);
@@ -10,9 +11,20 @@ function onEdit(e){
   
   var activeSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetName();
   Logger.log("Active sheet: " + activeSheet);
-  // Check if it was synced before
-  if(checkSync == 'Synced' && activeSheet == 'Lessons') {
+  
+  var column = range.getColumn();
+  Logger.log("Column index edited: " + column);
+  var flag = 0;
+  
+  if(column == 4 || column == 5 || column == 6 || column == 7 || column == 8 || column == 9 || column == 10) {
+    flag = 1;
+  }
+  
+  // Conditions to set update note
+  if(checkSync == 'Synced' && activeSheet == 'Lessons' && flag) {
     range.setNote('update');
+    Logger.log("Add note");
+    
   }
 }
 
@@ -35,6 +47,17 @@ function updateEvent_(calendar) {
         Logger.log("We have an update field!");
         
         var eventId = sheetLesson.getRange("L" + (x+3)).getValue();
+        
+        // When course is modified
+        if (y == 3) {
+          var course = newCell.getValue();  
+          var school = newCell.offset(0, -1).getValue();
+          var sessionId = newCell.offset(0, -3).getValue();
+          var newTitle = school + " " + course + " " + sessionId;
+          var title = calendar.getEventSeriesById(eventId).setTitle(newTitle);
+          
+          newCell.clearNote();
+        }
         
         // When date / start time / end time is modified
         if(y == 4 || y == 5 || y == 6) {
@@ -161,7 +184,7 @@ function updateEvent_(calendar) {
         }
         
         // When comments are modified
-        if (y == 11) {
+        if (y == 9) {
           var description = newCell.getValue();
           calendar.getEventSeriesById(eventId).setDescription(description);   
           newCell.clearNote();
