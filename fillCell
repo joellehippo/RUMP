@@ -1,0 +1,11 @@
+function fillCell(e){
+  var s = [];
+  for(var i in e){
+    if(i.substr(0, 2) == 'ch') s.push(e[i]);
+  }
+  if(s.length) {
+    var selectedRange = SpreadsheetApp.getActiveRange()
+    selectedRange.setValue(s.join(', '));
+    selectedRange.setNote('update');
+  }
+}
