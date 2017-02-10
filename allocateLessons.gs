@@ -138,7 +138,7 @@ function allocateLessons_() {
         
         var sessionId = 1;
         
-        var cid = sheetLesson.getRange("A" + index).setValue(id + " #" + sessionId);
+        var cid = sheetLesson.getRange("A" + index).setValue("#" + sessionId);
         Logger.log("CID: " + cid);
         
         var schoolL = sheetLesson.getRange("B" + index).setValue(school);
@@ -213,7 +213,7 @@ function allocateLessons_() {
             sheetLesson.getRange("E" + index).clearNote();
             // Modify session id
             sessionId++;
-            sheetLesson.getRange("A" + index).setValue(id + " #" + sessionId);
+            sheetLesson.getRange("A" + index).setValue("#" + sessionId);
           }
         }        
 
