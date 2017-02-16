@@ -7,4 +7,7 @@ function addInstrNEW_() {
   var html = HtmlService.createTemplateFromFile('InstrList').evaluate();
   SpreadsheetApp.getUi()
   .showSidebar(html);
-  }
+
+  
+}
+
