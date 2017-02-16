@@ -14,7 +14,8 @@ function pushToCalendar_(calendar) {
   for (var i = 0; i < values.length; i++) {     
         
     if (values[i][1].length > 0) {                                
-      var gCalCheck = values[i][12];
+      var gCalCheck = values[i][10];
+      Logger.log("gCalCheck: " + gCalCheck);
       
       // Checks if it was synced before
       if(gCalCheck != "Synced") {
